@@ -1,0 +1,26 @@
+//исправленный код с первого скрина
+
+class Car {
+    var driver: Man?
+    
+    deinit {
+        print("машина удалена из памяти")
+    }
+}
+
+class Man {
+    weak var myCar: Car? // Используем weak ссылку для предотвращения циклической зависимости
+    
+    deinit {
+        print("мужчина удален из памяти")
+    }
+}
+
+var car: Car? = Car()
+var man: Man? = Man()
+
+car?.driver = man
+man?.myCar = car
+
+car = nil
+man = nil
