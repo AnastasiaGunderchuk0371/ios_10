@@ -1,0 +1,18 @@
+class ExampleClass {
+    var multiplier: Int
+
+    init(multiplier: Int) {
+        self.multiplier = multiplier
+    }
+
+    func calculate(values: [Int]) -> [Int] {
+        return values.map({
+            [unowned self] value in
+            return value * self.multiplier
+        })
+    }
+}
+
+let exampleObject = ExampleClass(multiplier: 2)
+let result = exampleObject.calculate(values: [1, 2, 3])
+print(result) // Распечатает [2, 4, 6]
