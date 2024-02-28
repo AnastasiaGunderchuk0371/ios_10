@@ -1,0 +1,26 @@
+//задание со вторым черным скрином
+
+class Man {
+    var passport: Passport? // Изменим на опциональную ссылку
+    deinit {
+        print("Мужчина удален из памяти")
+    }
+}
+
+class Passport {
+    weak var man: Man? // Используем слабую ссылку, чтобы избежать циклической зависимости
+    
+    init(man: Man) {
+        self.man = man
+    }
+    
+    deinit {
+        print("Паспорт удален из памяти")
+    }
+}
+
+var man: Man? = Man()
+var passport: Passport? = Passport(man: man!) // Передаем неопциональный Man
+man?.passport = passport
+passport = nil // Теперь объект не удален, так как его удерживает Man
+man = nil // Теперь оба объекта будут успешно деинициализированы
